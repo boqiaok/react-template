@@ -2,12 +2,15 @@
   "presets": ["env", "react", "stage-2"],
   "plugins": [
     "transform-decorators-legacy",
-    ["transform-runtime", {
-      "helpers": false,
-      "polyfill": false,
-      "regenerator": true,
-      "moduleName": "babel-runtime"
-    }],
+    [
+      "transform-runtime",
+      {
+        "helpers": false,
+        "polyfill": false,
+        "regenerator": true,
+        "moduleName": "babel-runtime"
+      }
+    ],
     "syntax-dynamic-import"
   ]
 }
