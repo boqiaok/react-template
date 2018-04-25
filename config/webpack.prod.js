@@ -3,6 +3,8 @@ const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin')
+const precss = require('precss')
+const autoprefixer = require('autoprefixer')
 
 const extractSass = new ExtractTextPlugin({
   filename: 'css/[name].min.[hash:8].css',
@@ -40,6 +42,16 @@ const config = {
             },
             {
               loader: 'sass-loader',
+            },
+            {
+              loader: 'postcss-loader',
+              options: {
+                ident: 'postcss',
+                plugins: () => [
+                  precss(),
+                  autoprefixer({ browsers: ['IE >= 9'] }),
+                ],
+              },
             },
           ],
         }),

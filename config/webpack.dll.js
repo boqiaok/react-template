@@ -1,7 +1,14 @@
 const path = require('path')
 const webpack = require('webpack')
 
-const vendors = ['react', 'react-dom', 'react-router-dom', 'prop-types']
+const vendors = [
+  'react',
+  'react-dom',
+  'react-router-dom',
+  'prop-types',
+  'mobx',
+  'mobx-react',
+]
 
 const options = {
   mode: 'production',

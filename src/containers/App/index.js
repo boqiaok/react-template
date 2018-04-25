@@ -4,6 +4,7 @@ import { Provider } from 'mobx-react'
 import { hot } from 'react-hot-loader'
 import configureStore from '../../store'
 import Home from '../Home'
+import './index.scss'
 
 class App extends Component {
   render() {
