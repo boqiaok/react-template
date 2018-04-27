@@ -18,7 +18,7 @@ const config = {
   },
   output: {
     path: path.resolve('dist'),
-    filename: 'scripts/index-[hash:6].min.js',
+    filename: 'scripts/[name]-[hash:6].min.js',
     publicPath: '/',
   },
   module: {
@@ -110,6 +110,11 @@ const config = {
       includeSourcemap: false,
     }),
   ],
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+    },
+  },
 }
 
 module.exports = config

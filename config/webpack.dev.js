@@ -7,10 +7,12 @@ const common = require('./index')
 const config = {
   mode: 'development',
   devtool: 'source-map',
-  entry: path.resolve('src/app.js'),
+  entry: {
+    index: path.resolve('src/app.js'),
+  },
   output: {
     path: path.resolve('dist'),
-    filename: 'scripts/index-[hash:6].min.js',
+    filename: 'scripts/[name]-[hash:6].min.js',
     publicPath: '/',
   },
   module: {
