@@ -66,7 +66,16 @@ const config = {
         ],
       },
       {
-        test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
+        test: /\.svg$/,
+        use: {
+          loader: 'svg-url-loader',
+          options: {
+            limit: 8192,
+          },
+        },
+      },
+      {
+        test: /\.(png|jpg|gif|eot|ttf|woff|woff2)$/,
         use: {
           loader: 'url-loader',
           options: {
