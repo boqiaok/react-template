@@ -8,6 +8,7 @@ const vendors = [
   'prop-types',
   'mobx',
   'mobx-react',
+  'axios',
 ]
 
 const options = {

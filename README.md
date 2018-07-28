@@ -1,11 +1,12 @@
-# About 
+# About react template
 
 * React 16
 * React Router v4
 * Webpack v4
 * Mobx
-* Eslint
-* style-loader, sass-loader, css-loader
+* scss/css
+* eslint, lint-staged, husky
+* style-loader, sass-loader, css-loader, svg-loader, react-hot-loader4
 
 
 ### Installation
@@ -20,3 +21,8 @@
 
 > npm run build
 
+### Analysis
+
+> npm run report
+
+@boqiaok
