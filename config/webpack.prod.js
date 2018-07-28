@@ -1,15 +1,13 @@
 const path = require('path')
 const webpack = require('webpack')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin')
 const precss = require('precss')
 const autoprefixer = require('autoprefixer')
-
-const extractSass = new ExtractTextPlugin({
-  filename: 'css/[name].min.[hash:8].css',
-  allChunks: true,
-})
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const defaultConfig = require('./index')
 
 const config = {
   mode: 'production',
@@ -25,36 +23,23 @@ const config = {
     // 加载器配置
     rules: [
       {
-        test: /\.scss|.css$/,
+        test: /\.(sa|sc|c)ss$/,
         include: [path.resolve('src')],
-        use: extractSass.extract({
-          fallback: 'style-loader',
-          use: [
-            {
-              loader: 'css-loader',
-              options: {
-                // modules: true,
-                camelCase: true,
-                minimize: true,
-                localIdentName: '[name]_[local]_[hash:base64:3]',
-                importLoaders: 1,
-              },
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              ident: 'postcss',
+              plugins: () => [
+                precss(),
+                autoprefixer({ browsers: ['IE >= 9'] }),
+              ],
             },
-            {
-              loader: 'sass-loader',
-            },
-            {
-              loader: 'postcss-loader',
-              options: {
-                ident: 'postcss',
-                plugins: () => [
-                  precss(),
-                  autoprefixer({ browsers: ['IE >= 9'] }),
-                ],
-              },
-            },
-          ],
-        }),
+          },
+          'sass-loader',
+        ],
       },
       {
         test: /(\.jsx|\.js)$/,
@@ -80,14 +65,19 @@ const config = {
           loader: 'url-loader',
           options: {
             limit: 8192,
-            name: 'dist/img/[hash:8].[ext]',
+            name: 'img/[hash:8].[ext]',
           },
         },
       },
     ],
   },
   plugins: [
-    extractSass,
+    new MiniCssExtractPlugin({
+      // Options similar to the same options in webpackOptions.output
+      // both options are optional
+      filename: 'css/[name].min.[hash:8].css',
+      chunkFilename: 'css/[id].min.[hash:8].css',
+    }),
     new HtmlWebpackPlugin({
       template: 'config/index.html',
       inject: true,
@@ -104,7 +94,7 @@ const config = {
     }),
     new AddAssetHtmlPlugin({
       filepath: path.resolve('dist/dll/vendor.min.js'),
-      hash: false,
+      hash: true,
       outputPath: 'dll',
       publicPath: 'dll',
       includeSourcemap: false,
@@ -114,7 +104,20 @@ const config = {
     splitChunks: {
       chunks: 'all',
     },
+    minimizer: [
+      new UglifyJsPlugin({
+        cache: true,
+        parallel: true,
+        sourceMap: true, // set to true if you want JS source maps
+      }),
+      new OptimizeCSSAssetsPlugin({}),
+    ],
   },
+}
+
+if (defaultConfig.bundleAnalyzerReport) {
+  const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+  config.plugins.push(new BundleAnalyzerPlugin())
 }
 
 module.exports = config

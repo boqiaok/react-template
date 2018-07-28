@@ -12,7 +12,7 @@ const config = {
   },
   output: {
     path: path.resolve('dist'),
-    filename: 'scripts/[name]-[hash:6].min.js',
+    filename: 'scripts/[name].js',
     publicPath: '/',
   },
   module: {
