@@ -1,6 +1,6 @@
 {
   "name": "reactwebpack",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -13,7 +13,7 @@
     "precommit": "lint-staged",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "boqiaok",
   "license": "ISC",
   "dependencies": {
     "mobx": "^4.2.0",
