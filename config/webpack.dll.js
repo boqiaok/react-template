@@ -9,6 +9,7 @@ const vendors = [
   'mobx',
   'mobx-react',
   'axios',
+  'react-loadable',
 ]
 
 const options = {

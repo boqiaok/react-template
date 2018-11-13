@@ -13,6 +13,7 @@ module.exports = {
     'react/prefer-stateless-function': [0],
     'max-len': [2, 150],
     'import/no-extraneous-dependencies': [0],
+    'import/extensions': [0],
     'react/jsx-indent': [2, 2],
     'comma-dangle': [
       2,
@@ -24,6 +25,7 @@ module.exports = {
         functions: 'ignore',
       },
     ],
+    "import/no-unresolved": [0],
   },
   globals: {
     document: false,

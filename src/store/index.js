@@ -6,7 +6,7 @@ class Store {
     this.home = new Home(this)
   }
 
-  @observable userinfo = {}
+  @observable userinfo = { name: 'kim' }
 }
 
 export default function configureStore() {

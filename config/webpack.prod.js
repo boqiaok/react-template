@@ -7,6 +7,7 @@ const autoprefixer = require('autoprefixer')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 const defaultConfig = require('./index')
 
 const config = {
@@ -18,6 +19,20 @@ const config = {
     path: path.resolve('dist'),
     filename: 'scripts/[name]-[hash:6].min.js',
     publicPath: '/',
+  },
+  resolve: {
+    extensions: ['.js', '.jsx', '.json'],
+    alias: {
+      '@': path.resolve('src'),
+      Components: path.resolve('src/components'),
+      Config: path.resolve('src/config'),
+      Router: path.resolve('src/router'),
+      Store: path.resolve('src/store'),
+      Views: path.resolve('src/views'),
+      Styles: path.resolve('src/styles'),
+      Utils: path.resolve('src/utils'),
+      Root: path.resolve('./'),
+    },
   },
   module: {
     // 加载器配置
@@ -99,6 +114,13 @@ const config = {
       publicPath: 'dll',
       includeSourcemap: false,
     }),
+    new CopyWebpackPlugin([
+      {
+        from: path.resolve('static'),
+        to: path.resolve('dist/static'),
+        ignore: ['.*'],
+      },
+    ]),
   ],
   optimization: {
     splitChunks: {

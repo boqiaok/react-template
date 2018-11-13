@@ -2,6 +2,7 @@ const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 const common = require('./index')
 
 const config = {
@@ -14,6 +15,20 @@ const config = {
     path: path.resolve('dist'),
     filename: 'scripts/[name].js',
     publicPath: '/',
+  },
+  resolve: {
+    extensions: ['.js', '.vue', '.json'],
+    alias: {
+      '@': path.resolve('src'),
+      Components: path.resolve('src/components'),
+      Config: path.resolve('src/config'),
+      Router: path.resolve('src/router'),
+      Store: path.resolve('src/store'),
+      Views: path.resolve('src/views'),
+      Styles: path.resolve('src/styles'),
+      Utils: path.resolve('src/utils'),
+      Root: path.resolve('./'),
+    },
   },
   module: {
     rules: [
@@ -80,6 +95,14 @@ const config = {
       publicPath: 'dll',
       includeSourcemap: false,
     }),
+    new CopyWebpackPlugin([
+      {
+        from: path.resolve('static'),
+        to: path.resolve('dist/static'),
+        ignore: ['.*'],
+        cache: true,
+      },
+    ]),
   ],
   devServer: {
     headers: {
@@ -90,6 +113,7 @@ const config = {
       hash: false,
       maxModules: 0,
     },
+    open: true,
     compress: false,
     clientLogLevel: 'none',
     port: common.port,
