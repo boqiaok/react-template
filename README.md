@@ -25,4 +25,11 @@
 
 > npm run report
 
+### docker
+
+> docker build -t your-app-name .
+> docker run --rm -d -p 80:80 your-app-name
+> docker ps -a
+http://0.0.0.0/
+
 @boqiaok

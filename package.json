@@ -10,15 +10,18 @@
     "build": "npm run clean && npm run build:dll && webpack --config config/webpack.prod.js",
     "clean": "rimraf dist",
     "report": "cross-env report=true npm run build",
+    "lint": "eslint --ext .js,.jsx src || exit 0",
     "precommit": "lint-staged",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "boqiaok",
   "license": "ISC",
   "dependencies": {
+    "@sentry/browser": "^4.5.3",
     "axios": "^0.18.0",
     "mobx": "^4.2.0",
     "mobx-react": "^5.0.0",
+    "mobx-task": "^1.0.0-alpha.0",
     "prop-types": "^15.6.1",
     "react": "^16.3.1",
     "react-dom": "^16.3.1",
@@ -27,6 +30,7 @@
   },
   "lint-staged": {
     "src/**/*.js": [
+      "prettier --write",
       "eslint --fix",
       "git add"
     ]
@@ -48,9 +52,11 @@
     "css-loader": "^0.28.11",
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^16.1.0",
+    "eslint-config-prettier": "^3.3.0",
     "eslint-plugin-babel": "^5.0.0",
     "eslint-plugin-import": "^2.11.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-prettier": "^3.0.0",
     "eslint-plugin-react": "^7.7.0",
     "html-webpack-plugin": "^3.2.0",
     "husky": "^0.14.3",
@@ -60,6 +66,7 @@
     "optimize-css-assets-webpack-plugin": "^5.0.0",
     "postcss-loader": "^2.1.4",
     "precss": "^3.1.2",
+    "prettier": "^1.15.3",
     "react-hot-loader": "^4.0.1",
     "rimraf": "^2.6.2",
     "sass-loader": "^7.0.1",

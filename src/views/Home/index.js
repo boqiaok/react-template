@@ -7,6 +7,6 @@ import React, { Component } from 'react'
 // @observer
 export default class Home extends Component {
   render() {
-    return <div>1111</div>
+    return <div>home</div>
   }
 }

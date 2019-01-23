@@ -7,7 +7,8 @@ const common = require('./index')
 
 const config = {
   mode: 'development',
-  devtool: 'source-map',
+  // devtool: 'source-map',
+  devtool: 'cheap-module-source-map',
   entry: {
     index: path.resolve('src/app.js'),
   },
@@ -92,7 +93,7 @@ const config = {
       filepath: path.resolve('dist/dll/vendor.min.js'),
       hash: false,
       outputPath: 'dll',
-      publicPath: 'dll',
+      publicPath: '/dll',
       includeSourcemap: false,
     }),
     new CopyWebpackPlugin([
